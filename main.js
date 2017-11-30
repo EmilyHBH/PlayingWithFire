@@ -24,7 +24,7 @@ function bane(kol, rad){
         blockType;
 
         // Stein block, risse rundt banen
-        if(x === 0 || x === kol || y === 0 || y === rad || (x % 2 === 0 && y % 2 === 0)){
+        if(x === 0 || x === kol -1 || y === 0 || y === rad -1 || (x % 2 === 0 && y % 2 === 0)){
          blockType = 1;
         } else {
          blockType = 2; //TODO: generer random type
@@ -34,11 +34,11 @@ function bane(kol, rad){
     }
     createBlocks(kol, rad);
 }
-function stoneBlocks(kol, rad){
+function createBlocks(kol, rad){
    // Stein blokker
    for(let i = 0; i < layout.length; i++){
     	if(layout[i].z === 1){
-    		c.drawImage(concrete,CordX(kol),CordY(rad));
+            c.drawImage(concrete,CordX(layout[i].x),CordY(layout[i].y));
       	}
    }
 }
