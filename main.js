@@ -10,35 +10,35 @@ generateLevel(15);
 
 /* Generate size of game */
 function generateLevel(x, y = x){
-   /* Tar både x og y størrelse som parametre.
-   *  Om en y verdi ikke blir oppgitt, får den x verdien (kvadratisk oppsett) */
-   canvas.width = BLOCKSIZE * x;
-   canvas.height = BLOCKSIZE * y;
-   bane(x, y);
+    /* Tar både x og y størrelse som parametre.
+    *  Om en y verdi ikke blir oppgitt, får den x verdien (kvadratisk oppsett) */
+    canvas.width = BLOCKSIZE * x;
+    canvas.height = BLOCKSIZE * y;
+    bane(x, y);
 }
 function bane(kol, rad){
-   /* Lager array som har blokkene, bane layouten */
-   for(let i = 0; i < kol * rad; i++){
-      let x = Math.floor(i/rad),
-      y = i - (x * rad),
-      blockType;
-      
-      // Stein block, risse rundt banen
-      if(x === 0 || x === kol || y === 0 || y === rad || (x % 2 === 0 && y % 2 === 0)){
+    /* Lager array som har blokkene, bane layouten */
+    for(let i = 0; i < kol * rad; i++){
+        let x = Math.floor(i/rad),
+        y = i - (x * rad),
+        blockType;
+
+        // Stein block, risse rundt banen
+        if(x === 0 || x === kol || y === 0 || y === rad || (x % 2 === 0 && y % 2 === 0)){
          blockType = 1;
-      } else {
+        } else {
          blockType = 2; //TODO: generer random type
-      }
-      let block = {"x":x, "y":y, "z":blockType};
-      layout.push(block);
-   }
-   stoneBlock(kol, rad);
+        }
+        let block = {"x":x, "y":y, "z":blockType};
+        layout.push(block);
+    }
+    createBlocks(kol, rad);
 }
-function stoneBlocks(kol, rad){
-   // Stein blokker
-   for(let i = 0; i < layout.length; i++){
-      if(layout[i].z === 1){
-         
-      }         
-   }
+function createBlocks(kol, rad){
+    // Stein blokker
+    for(let i = 0; i < layout.length; i++){
+        if(layout[i].z === 1){
+
+        }         
+    }
 }
