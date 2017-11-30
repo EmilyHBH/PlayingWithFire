@@ -25,9 +25,9 @@ function bane(kol, rad){
 
         // Stein block, risse rundt banen
         if(x === 0 || x === kol || y === 0 || y === rad || (x % 2 === 0 && y % 2 === 0)){
-         blockType = 1;
+        	blockType = 1;
         } else {
-         blockType = 2; //TODO: generer random type
+        	blockType = 2; //TODO: generer random type
         }
         let block = {"x":x, "y":y, "z":blockType};
         layout.push(block);
