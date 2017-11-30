@@ -9,7 +9,7 @@ var kol = 0;
 var rad = 0;
 
 window.onload = function(){
-    generateLevel(17);
+    generateLevel(19);
 }
 
 /* Generate size of game */
@@ -35,7 +35,7 @@ function bane(){
         } else {
             blockType = tonne(x,y);
         }
-        let block = {"x":x, "y":y, "z":blockType};
+        let block = {"x":x, "y":y, "z":blockType, "xCord":CordX(x), "yCord": CordY(y)};
         layout.push(block);
     }
     createBlocks();
@@ -44,11 +44,11 @@ function createBlocks(){
    // Stein blokker
    for(let i = 0; i < layout.length; i++){
     	if(layout[i].z === 1){
-            c.drawImage(concrete,CordX(layout[i].x),CordY(layout[i].y));
+            c.drawImage(concrete,layout[i].xCord,layout[i].yCord);
       	} else if(layout[i].z === 3){
-            c.drawImage(asfalt,CordX(layout[i].x),CordY(layout[i].y));
+            c.drawImage(asfalt,layout[i].xCord,layout[i].yCord);
         }else if(layout[i].z === 2){
-            c.drawImage(boks,CordX(layout[i].x),CordY(layout[i].y));            
+            c.drawImage(boks,layout[i].xCord,layout[i].yCord);            
         }
    }
 }
@@ -60,7 +60,9 @@ function tonne(x,y){
         block = 3;
     }
     else {
-        block = Math.floor(Math.random() * 2) + 2; //TODO: sannsynlighet
+        let prosent = Math.floor(30+ 450/kol);
+        let done = Math.floor(Math.random() * 100);
+        block = done > prosent ? 3 : 2;
     }
     return block;
 }
