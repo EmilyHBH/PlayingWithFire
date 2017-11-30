@@ -24,7 +24,7 @@ function bane(kol, rad){
       blockType;
       
       // Stein block, risse rundt banen
-      if(x === 0 || x === kol || y === 0 || y === 1 || (x % 2 === 1 && y % 2 === 1 && (x !== kol -1))){
+      if(x === 0 || x === kol || y === 0 || y === rad || (x % 2 === 0 && y % 2 === 0 && (x !== kol -1) && (y !== rad -1))){
          blockType = 1;
       } else {
          blockType = 2; //TODO: generer random type
