@@ -17,16 +17,28 @@ function generateLevel(x, y = x){
    bane(x, y);
 }
 function bane(kol, rad){
+   /* Lager array som har blokkene, bane layouten */
    for(let i = 0; i < kol * rad; i++){
       let x = Math.floor(i/rad),
       y = i - (x * rad),
-      blockType = 1;
+      blockType;
+      
+      // Stein block, risse rundt banen
+      if(x === 0 || x === kol || y === 0 || y === 1 || (x % 2 === 1 && y % 2 === 1 && (x !== kol -1))){
+         blockType = 1;
+      } else {
+         blockType = 2; //TODO: generer random type
+      }
       let block = {"x":x, "y":y, "z":blockType};
       layout.push(block);
    }
-   console.log(layout);
-   stoneBlock();
+   stoneBlock(kol, rad);
 }
-function stoneBlocks(){
-   
+function stoneBlocks(kol, rad){
+   // Stein blokker
+   for(let i = 0; i < layout.length; i++){
+      if(layout[i].z === 1){
+         
+      }         
+   }
 }
