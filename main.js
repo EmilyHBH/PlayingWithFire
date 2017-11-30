@@ -52,7 +52,7 @@ function createBlocks(){
 }
 function tonne(x,y){
     if((y == 1 && x <= 3) || (y == 1 && x >= rad -4) ||
-    (y == kol-1 && x <= 3) || (y == kol-1 && x >= rad -4) ||
+    (y == kol-2 && x <= 3) || (y == kol-2 && x >= rad -4) ||
     (x == 1 && y <= 3) || (x == 1 && y >= kol -4) ||
     (x == rad-2 && y <= 3) || (x == rad-2 && y >= kol -4)){
         block = 3;
