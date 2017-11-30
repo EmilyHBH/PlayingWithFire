@@ -34,11 +34,17 @@ function bane(kol, rad){
     }
     createBlocks(kol, rad);
 }
-function createBlocks(kol, rad){
-    // Stein blokker
-    for(let i = 0; i < layout.length; i++){
-        if(layout[i].z === 1){
-
-        }         
-    }
+function stoneBlocks(kol, rad){
+   // Stein blokker
+   for(let i = 0; i < layout.length; i++){
+    	if(layout[i].z === 1){
+    		c.drawImage(concrete,CordX(kol),CordY(rad));
+      	}
+   }
+}
+function CordX(x){
+	return x*BLOCKSIZE;
+}
+function CordY(y){
+	return y*BLOCKSIZE;
 }
