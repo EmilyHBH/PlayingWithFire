@@ -5,6 +5,10 @@ var layout = [];
 var asfalt=document.getElementById("asfaltPng");
 var boks=document.getElementById("boxPng");
 var concrete=document.getElementById("concretePng");
+var pl1f = document.querySelector("#spiller1-flytt");
+var pl1s = document.querySelector("#spiller1-stille");
+var pl2f = document.querySelector("#spiller2-flytt");
+var pl2s = document.querySelector("#spiller2-stille");
 var kol = 0;
 var rad = 0;
 
@@ -39,6 +43,7 @@ function bane(){
         layout.push(block);
     }
     createBlocks();
+    placePlayers();
 }
 function createBlocks(){
    // Stein blokker
@@ -65,6 +70,16 @@ function tonne(x,y){
         block = done > prosent ? 3 : 2;
     }
     return block;
+}
+function placePlayers(players = 2){     
+    // TODO: lagre var et sted med antall players, som blir send i parametre
+    c.drawImage(pl1s,layout[1].xCord,layout[kol +1].yCord);
+    c.drawImage(pl2s,layout[kol -2].xCord,layout[kol +1].yCord);
+    
+    if(players >= 3)
+        c.drawImage(pl2s,layout[1].xCord,layout[rad -1].yCord);
+    if(players === 4)
+        c.drawImage(pl2s,layout[kol -1].xCord,layout[1].yCord);
 }
 function CordX(x){
 	return x*BLOCKSIZE;
