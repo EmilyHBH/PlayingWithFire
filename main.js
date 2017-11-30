@@ -8,7 +8,9 @@ var concrete=document.getElementById("concretePng");
 var kol = 0;
 var rad = 0;
 
-generateLevel(9);
+window.onload = function(){
+    generateLevel(17);
+}
 
 /* Generate size of game */
 function generateLevel(x, y = x){
@@ -45,21 +47,20 @@ function createBlocks(){
             c.drawImage(concrete,CordX(layout[i].x),CordY(layout[i].y));
       	} else if(layout[i].z === 3){
             c.drawImage(asfalt,CordX(layout[i].x),CordY(layout[i].y));
-        }/*else if(layout[i].z === 2){
+        }else if(layout[i].z === 2){
             c.drawImage(boks,CordX(layout[i].x),CordY(layout[i].y));            
-        }*/
+        }
    }
 }
 function tonne(x,y){
     if((y == 1 && x <= 3) || (y == 1 && x >= rad -4) ||
-    (y == kol-1 && x <= 3) || (y == kol-1 && x >= rad -4) ||
+    (y == kol-2 && x <= 3) || (y == kol-2 && x >= rad -4) ||
     (x == 1 && y <= 3) || (x == 1 && y >= kol -4) ||
     (x == rad-2 && y <= 3) || (x == rad-2 && y >= kol -4)){
         block = 3;
-        console.log("asfalt", x,y);
     }
     else {
-        block = /*Math.floor(Math.random() * 2) +*/ 2; //TODO: sannsynlighet
+        block = Math.floor(Math.random() * 2) + 2; //TODO: sannsynlighet
     }
     return block;
 }
