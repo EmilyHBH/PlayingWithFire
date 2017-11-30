@@ -9,7 +9,7 @@ var kol = 0;
 var rad = 0;
 
 window.onload = function(){
-    generateLevel(19);
+    generateLevel(15);
 }
 
 /* Generate size of game */
