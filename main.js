@@ -2,6 +2,9 @@ var canvas = document.querySelector("canvas");
 var c = canvas.getContext("2d");
 const BLOCKSIZE = 30;
 var layout = [];
+var asfalt=document.getElementById("asfaltPng");
+var boks=document.getElementById("boksPng");
+var concrete=document.getElementById("concretePng");
 
 generateLevel(20);
 
