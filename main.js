@@ -27,7 +27,7 @@ function bane(kol, rad){
         if(x === 0 || x === kol -1 || y === 0 || y === rad -1 || (x % 2 === 0 && y % 2 === 0)){
          blockType = 1;
         } else {
-         blockType = 2; //TODO: generer random type
+        	blockType = 2; //TODO: generer random type
         }
         let block = {"x":x, "y":y, "z":blockType};
         layout.push(block);
