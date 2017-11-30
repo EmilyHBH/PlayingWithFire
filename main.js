@@ -6,7 +6,7 @@ var asfalt=document.getElementById("asfaltPng");
 var boks=document.getElementById("boksPng");
 var concrete=document.getElementById("concretePng");
 
-generateLevel(20);
+generateLevel(15);
 
 /* Generate size of game */
 function generateLevel(x, y = x){
@@ -24,7 +24,7 @@ function bane(kol, rad){
       blockType;
       
       // Stein block, risse rundt banen
-      if(x === 0 || x === kol || y === 0 || y === rad || (x % 2 === 0 && y % 2 === 0 && (x !== kol -1) && (y !== rad -1))){
+      if(x === 0 || x === kol || y === 0 || y === rad || (x % 2 === 0 && y % 2 === 0)){
          blockType = 1;
       } else {
          blockType = 2; //TODO: generer random type
