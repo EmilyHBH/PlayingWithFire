@@ -1,3 +1,11 @@
+body {
+	width:100vw;
+	margin:0 auto;
+}
 .bilder{
 	display:none;
+}
+canvas {
+	position:absolute;
+	margin:0 auto;
 }

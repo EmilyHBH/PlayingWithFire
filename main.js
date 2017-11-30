@@ -1,5 +1,7 @@
-var canvas = document.querySelector("canvas");
-var c = canvas.getContext("2d");
+var canvas1 = document.querySelector("canvas#one");
+var c1 = canvas1.getContext("2d");
+var canvas2 = document.querySelector("canvas#two");
+var c2 = canvas2.getContext("2d");
 const BLOCKSIZE = 30;
 var layout = [];
 var asfalt=document.getElementById("asfaltPng");
@@ -14,6 +16,20 @@ var rad = 0;
 
 window.onload = function(){
     generateLevel(15);
+    document.body.onkeydown = move;
+}
+
+/* Player Movements */
+function move(evt){
+    let s = 83, w = 87, a = 82, d = 84;
+    if(evt.which == s || evt.keyCode == s){
+        console.log("Pressed S");
+    } else if(evt.which == w || evt.keyCode == w){
+        console.log("Pressed W")
+    }
+    this.onkeyup = function(){
+        console.log("Released");
+    }
 }
 
 /* Generate size of game */
@@ -22,8 +38,10 @@ function generateLevel(x, y = x){
     rad = y;
     /* Tar både x og y størrelse som parametre.
     *  Om en y verdi ikke blir oppgitt, får den x verdien (kvadratisk oppsett) */
-    canvas.width = BLOCKSIZE * x;
-    canvas.height = BLOCKSIZE * y;
+    canvas1.width = BLOCKSIZE * x;
+    canvas1.height = BLOCKSIZE * y;
+    canvas2.width = BLOCKSIZE * x;
+    canvas2.height = BLOCKSIZE * y;
     bane(x, y);
 }
 function bane(){
@@ -49,11 +67,11 @@ function createBlocks(){
    // Stein blokker
    for(let i = 0; i < layout.length; i++){
     	if(layout[i].z === 1){
-            c.drawImage(concrete,layout[i].xCord,layout[i].yCord);
+            c1.drawImage(concrete,layout[i].xCord,layout[i].yCord);
       	} else if(layout[i].z === 3){
-            c.drawImage(asfalt,layout[i].xCord,layout[i].yCord);
+            c1.drawImage(asfalt,layout[i].xCord,layout[i].yCord);
         }else if(layout[i].z === 2){
-            c.drawImage(boks,layout[i].xCord,layout[i].yCord);            
+            c1.drawImage(boks,layout[i].xCord,layout[i].yCord);            
         }
    }
 }
@@ -73,13 +91,25 @@ function tonne(x,y){
 }
 function placePlayers(players = 2){     
     // TODO: lagre var et sted med antall players, som blir send i parametre
-    c.drawImage(pl1s,layout[1].xCord,layout[kol +1].yCord);
-    c.drawImage(pl2s,layout[kol -2].xCord,layout[kol +1].yCord);
+    var p1x = layout[1].xCord,
+    p1y = layout[kol +1].yCord,
+    p2x = layout[kol -2].xCord,
+    p2y = layout[kol +1].yCord;
+    p3x = layout[1].xCord,
+    p3y = layout[rad -1].yCord,
+    p4x = layout[kol -1].xCord,
+    p4y = layout[1].yCord;    
     
+    c2.drawImage(pl1s,p1x,p1y);
+    c2.drawImage(pl2s,p2x,p2y);
+        
     if(players >= 3)
-        c.drawImage(pl2s,layout[1].xCord,layout[rad -1].yCord);
+        c2.drawImage(pl2s,p3x,p3y);
     if(players === 4)
-        c.drawImage(pl2s,layout[kol -1].xCord,layout[1].yCord);
+        c2.drawImage(pl2s,p4x,p4y);
+    
+    /* Brukes i funksjon til å 'redraw' */    
+    //c2.clearRect(0,0,canvas2.width, canvas2.height);
 }
 function CordX(x){
 	return x*BLOCKSIZE;
