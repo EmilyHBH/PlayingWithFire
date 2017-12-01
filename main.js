@@ -16,6 +16,9 @@ var rad = 0;
 var p1x, p1y, p2x, p2y, p3x, p3y, p4x, p4y;
 var moveEnabled=true;
 
+var keyCodes = {"player1":{"s":83, "w":87,"a":65,"d":68,"space":32},
+                "player2":{"ad":40,"au":38,"al":37,"ar":39,"fn":220}};
+
 window.onload = function(){
     generateLevel(15);
     window.onkeydown = move;
@@ -23,50 +26,47 @@ window.onload = function(){
 
 /* Player Movements */
 function move(evt){
+    var player1 = keyCodes.player1;     // Burde vært mulig uten denne mellomlagringen, med fikk det ikke til :/
+    
 	if(moveEnabled===true){
-	    let s = 83, w = 87, a = 82, d = 84, space = 32, ad = 40, au = 38, al = 37, ar = 39, fn = 220;
-	    /*if(evt.which == s || evt.keyCode == s){
-	        console.log("Pressed S");
-	    } else if(evt.which == w || evt.keyCode == w){
-	        console.log("Pressed W")
-	    } else if(evt.which == a || evt.keyCode == d)*/
-
-	    switch (evt.which){
-			case s:
-				p1Move("s");
-	            console.log("pressed S");
-	            break;
-	        case w:
-	            break;
-	        case d:
-	            break;
-	        case a:
-	            break;
-	        case space:
-	        	p1Bomb();
-	            break;
-	        /*case ad:
-	            break;
-	        case au:
-	            break;
-	        case al:
-	            break;
-	        case ar:
-	            break;
-	        case fn:
-	            break;*/
-	        default:
-	            break;
-	    }
+        // Denne sjekker om player 1 tastatur er trykket. 
+        // Sender da hvilken tast gjennom parametre til p1Move funksjonen  
+        for(var x in player1){
+            if(evt.which == player1[x]){
+                p1Move(x);
+            }
+        }
 	}
     this.onkeyup = function(){
-        console.log("Released");
+        //console.log("Released");
     }
 }
 function p1Move(dir){
-	c2.clearRect(p1x,p2y,30,30);
+	c2.clearRect(p1x, p1y, BLOCKSIZE, BLOCKSIZE);
 
 	//Trenger en praktisk måte å endre på pxx/pxy så det både huskes og flyttes med mindre enn en rute av gangen.
+    switch(dir){
+        case "s":
+            p1y += (BLOCKSIZE / 5);
+            break;
+        case "w":
+            p1y -= (BLOCKSIZE / 5);
+            break;
+        case "d":
+            p1x += (BLOCKSIZE / 5);
+            break;
+        case "a":
+            p1x -= (BLOCKSIZE / 5);
+            break;
+        
+        default:
+            break;
+    }
+    // 5-tallet brukt her er placeholder for spillerens fart.
+    // Vi må også lage den algoritmen for å beregne speed basert på sko-powerup
+    // Men det tar vi senere x.x
+    
+    c2.drawImage(pl1f,p1x,p1y);
 
 	//En annen ting er det at jeg tror ikke vi trenger "requestAnimationFrame()" i det hele tatt med den løsningen vi har her, men jeg er ikke sikker så jeg vet ikke om jeg vil satse på det.
 
@@ -154,7 +154,7 @@ function placePlayers(players = 2){
 }
 function CordX(x){
 	return x*BLOCKSIZE;
-}
+};
 function CordY(y){
 	return y*BLOCKSIZE;
 }
