@@ -13,25 +13,65 @@ var pl2f = document.querySelector("#spiller2-flytt");
 var pl2s = document.querySelector("#spiller2-stille");
 var kol = 0;
 var rad = 0;
+var p1x, p1y, p2x, p2y, p3x, p3y, p4x, p4y;
+var moveEnabled=true;
 
 window.onload = function(){
     generateLevel(15);
-    document.body.onkeydown = move;
+    window.onkeydown = move;
 }
 
 /* Player Movements */
 function move(evt){
-    let s = 83, w = 87, a = 82, d = 84;
-    if(evt.which == s || evt.keyCode == s){
-        console.log("Pressed S");
-    } else if(evt.which == w || evt.keyCode == w){
-        console.log("Pressed W")
-    }
+	if(moveEnabled===true){
+	    let s = 83, w = 87, a = 82, d = 84, space = 32, ad = 40, au = 38, al = 37, ar = 39, fn = 220;
+	    /*if(evt.which == s || evt.keyCode == s){
+	        console.log("Pressed S");
+	    } else if(evt.which == w || evt.keyCode == w){
+	        console.log("Pressed W")
+	    } else if(evt.which == a || evt.keyCode == d)*/
+
+	    switch (evt.which){
+			case s:
+				p1Move("s");
+	            console.log("pressed S");
+	            break;
+	        case w:
+	            break;
+	        case d:
+	            break;
+	        case a:
+	            break;
+	        case space:
+	        	p1Bomb();
+	            break;
+	        /*case ad:
+	            break;
+	        case au:
+	            break;
+	        case al:
+	            break;
+	        case ar:
+	            break;
+	        case fn:
+	            break;*/
+	        default:
+	            break;
+	    }
+	}
     this.onkeyup = function(){
         console.log("Released");
     }
 }
+function p1Move(dir){
+	c2.clearRect(p1x,p2y,30,30);
 
+	//Trenger en praktisk måte å endre på pxx/pxy så det både huskes og flyttes med mindre enn en rute av gangen.
+
+	//En annen ting er det at jeg tror ikke vi trenger "requestAnimationFrame()" i det hele tatt med den løsningen vi har her, men jeg er ikke sikker så jeg vet ikke om jeg vil satse på det.
+
+	//c2.drawImage();
+}
 /* Generate size of game */
 function generateLevel(x, y = x){
     kol = x;
@@ -44,6 +84,7 @@ function generateLevel(x, y = x){
     canvas2.height = BLOCKSIZE * y;
     bane(x, y);
 }
+
 function bane(){
     /* Lager array som har blokkene, bane layouten */
     for(let i = 0; i < kol * rad; i++){
@@ -91,13 +132,13 @@ function tonne(x,y){
 }
 function placePlayers(players = 2){     
     // TODO: lagre var et sted med antall players, som blir send i parametre
-    var p1x = layout[1].xCord,
-    p1y = layout[kol +1].yCord,
-    p2x = layout[kol -2].xCord,
+    p1x = layout[1].xCord;
+    p1y = layout[kol +1].yCord;
+    p2x = layout[kol -2].xCord;
     p2y = layout[kol +1].yCord;
-    p3x = layout[1].xCord,
-    p3y = layout[rad -1].yCord,
-    p4x = layout[kol -1].xCord,
+    p3x = layout[1].xCord;
+    p3y = layout[rad -1].yCord;
+    p4x = layout[kol -1].xCord;
     p4y = layout[1].yCord;    
     
     c2.drawImage(pl1s,p1x,p1y);
