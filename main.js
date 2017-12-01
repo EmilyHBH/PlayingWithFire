@@ -50,11 +50,6 @@ function p1Move(dir){
     switch(dir){
         case "s":
             p1y += (BLOCKSIZE / playerInfo.player1["fart"]);
-            c2.save();
-           	c2.translate(c2.width/2,c2.height/2);
-           	c2.rotate(180*Math.PI/180);
-           	c2.drawImage(pl1f,p1x,p1y);
-            c2.restore();
             checkLegalMove(p1x,p1y) ? p1y -= (BLOCKSIZE / playerInfo.player1["fart"]) : "";
             break;
         case "w":
