@@ -18,6 +18,10 @@ var moveEnabled=true;
 
 var keyCodes = {"player1":{"s":83, "w":87,"a":65,"d":68,"space":32},
                 "player2":{"ad":40,"au":38,"al":37,"ar":39,"fn":220}};
+var playerInfo = {  "player1": {"liv":3,"fart":5,"bomber":1,"lyn":1},
+                    "player2": {"liv":3,"fart":5,"bomber":1,"lyn":1},
+                    "player3": {"liv":3,"fart":5,"bomber":1,"lyn":1},
+                    "player4": {"liv":3,"fart":5,"bomber":1,"lyn":1}   };
 
 window.onload = function(){
     generateLevel(15);
@@ -26,13 +30,11 @@ window.onload = function(){
 
 /* Player Movements */
 function move(evt){
-    var player1 = keyCodes.player1;     // Burde vært mulig uten denne mellomlagringen, med fikk det ikke til :/
-    
 	if(moveEnabled===true){
         // Denne sjekker om player 1 tastatur er trykket. 
         // Sender da hvilken tast gjennom parametre til p1Move funksjonen  
-        for(var x in player1){
-            if(evt.which == player1[x]){
+        for(var x in keyCodes.player1){
+            if(evt.which == keyCodes.player1[x]){
                 p1Move(x);
             }
         }
@@ -130,16 +132,16 @@ function tonne(x,y){
     }
     return block;
 }
-function placePlayers(players = 2){     
+function placePlayers(players = 4){     
     // TODO: lagre var et sted med antall players, som blir send i parametre
     p1x = layout[1].xCord;
     p1y = layout[kol +1].yCord;
     p2x = layout[kol -2].xCord;
     p2y = layout[kol +1].yCord;
     p3x = layout[1].xCord;
-    p3y = layout[rad -1].yCord;
-    p4x = layout[kol -1].xCord;
-    p4y = layout[1].yCord;    
+    p3y = layout[layout.length - rad - 1].yCord;
+    p4x = layout[kol -2].xCord;
+    p4y = layout[layout.length - rad - 1].yCord;
     
     c2.drawImage(pl1s,p1x,p1y);
     c2.drawImage(pl2s,p2x,p2y);
@@ -147,7 +149,7 @@ function placePlayers(players = 2){
     if(players >= 3)
         c2.drawImage(pl2s,p3x,p3y);
     if(players === 4)
-        c2.drawImage(pl2s,p4x,p4y);
+        c2.drawImage(pl1s,p4x,p4y);
     
     /* Brukes i funksjon til å 'redraw' */    
     //c2.clearRect(0,0,canvas2.width, canvas2.height);
