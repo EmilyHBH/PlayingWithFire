@@ -46,10 +46,15 @@ function move(evt){
 function p1Move(dir){
 	c2.clearRect(p1x, p1y, BLOCKSIZE, BLOCKSIZE);
 
-	//Trenger en praktisk måte å endre på pxx/pxy så det både huskes og flyttes med mindre enn en rute av gangen.
+
     switch(dir){
         case "s":
             p1y += (BLOCKSIZE / 5);
+            c2.save();
+           	c2.translate(c2.width/2,c2.height/2);
+           	c2.rotate(180*Math.PI/180);
+           	c2.drawImage(pl1f,p1x,p1y);
+            c2.restore();
             break;
         case "w":
             p1y -= (BLOCKSIZE / 5);
@@ -68,7 +73,7 @@ function p1Move(dir){
     // Vi må også lage den algoritmen for å beregne speed basert på sko-powerup
     // Men det tar vi senere x.x
     
-    c2.drawImage(pl1f,p1x,p1y);
+    //c2.drawImage(pl1f,p1x,p1y);
 
 	//En annen ting er det at jeg tror ikke vi trenger "requestAnimationFrame()" i det hele tatt med den løsningen vi har her, men jeg er ikke sikker så jeg vet ikke om jeg vil satse på det.
 
