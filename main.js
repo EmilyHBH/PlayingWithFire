@@ -49,24 +49,25 @@ function p1Move(dir){
 	//Trenger en praktisk måte å endre på pxx/pxy så det både huskes og flyttes med mindre enn en rute av gangen.
     switch(dir){
         case "s":
-            p1y += (BLOCKSIZE / 5);
+            p1y += (BLOCKSIZE / playerInfo.player1["fart"]);
+            checkLegalMove(p1x,p1y) ? p1y -= (BLOCKSIZE / playerInfo.player1["fart"]) : "";
             break;
         case "w":
-            p1y -= (BLOCKSIZE / 5);
+            p1y -= (BLOCKSIZE / playerInfo.player1["fart"]);
+            checkLegalMove(p1x,p1y) ? p1y += (BLOCKSIZE / playerInfo.player1["fart"]) : "";
             break;
         case "d":
-            p1x += (BLOCKSIZE / 5);
+            p1x += (BLOCKSIZE / playerInfo.player1["fart"]);
+            checkLegalMove(p1x,p1y) ? p1x -= (BLOCKSIZE / playerInfo.player1["fart"]) : "";
             break;
         case "a":
-            p1x -= (BLOCKSIZE / 5);
+            p1x -= (BLOCKSIZE / playerInfo.player1["fart"]);
+            checkLegalMove(p1x,p1y) ? p1x += (BLOCKSIZE / playerInfo.player1["fart"]) : "";
             break;
         
         default:
             break;
     }
-    // 5-tallet brukt her er placeholder for spillerens fart.
-    // Vi må også lage den algoritmen for å beregne speed basert på sko-powerup
-    // Men det tar vi senere x.x
     
     c2.drawImage(pl1f,p1x,p1y);
 
@@ -74,6 +75,10 @@ function p1Move(dir){
 
 	//c2.drawImage();
 }
+function checkLegalMove(px,py){
+    
+}
+
 /* Generate size of game */
 function generateLevel(x, y = x){
     kol = x;
@@ -114,7 +119,7 @@ function createBlocks(){
       	} else if(layout[i].z === 3){
             c1.drawImage(asfalt,layout[i].xCord,layout[i].yCord);
         }else if(layout[i].z === 2){
-            c1.drawImage(boks,layout[i].xCord,layout[i].yCord);            
+            c1.drawImage(boks,layout[i].xCord,layout[i].yCord);
         }
    }
 }
